@@ -47,8 +47,7 @@ class APIClient(object):
         payload, boundary = self._encode_multipart(**kw)
         req = urllib2.Request(url, payload, self._BASE_HEADERS)
         req.add_header('Content-Type', 'multipart/form-data; boundary=%s' % boundary)
-        with open('content.html', 'w') as f:
-            f.write(urllib2.urlopen(req).read())
+        urllib2.urlopen(req).close()
 
     def _encode_params(self, **kw):
         '''
